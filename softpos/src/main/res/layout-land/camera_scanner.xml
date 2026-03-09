@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2021 by VeriFone, Inc.
+  ~ All Rights Reserved.
+  ~ THIS FILE CONTAINS PROPRIETARY AND CONFIDENTIAL INFORMATION
+  ~ AND REMAINS THE UNPUBLISHED PROPERTY OF VERIFONE, INC.
+  ~
+  ~ Use, disclosure, or reproduction is prohibited
+  ~ without prior written approval from VeriFone, Inc.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rootLayout"
+    android:background="@color/scanner_background">
+
+    <com.verifone.payment_sdk.scanner.AutoFitTextureView
+        android:id="@+id/previewTexture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/overlay_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/barcodeLabel"
+            style="@style/PreviewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="2dp"
+            android:text="" />
+
+        <com.verifone.payment_sdk.scanner.ActionButton
+            android:id="@+id/torch"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_margin="21dp"
+            android:background="@drawable/button_drawable"
+            android:drawableStart="@drawable/flash_light_50"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/buttonIconTint" />
+
+        <com.verifone.payment_sdk.scanner.ActionButton
+            android:id="@+id/aim"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_margin="21dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_drawable"
+            android:drawableStart="@drawable/ic_aim"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@+id/torch"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/buttonIconTint" />
+
+        <com.verifone.payment_sdk.scanner.ActionButton
+            android:id="@+id/close"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_margin="21dp"
+            android:background="@drawable/button_drawable"
+            android:drawableStart="@drawable/ic_close"
+            android:paddingEnd="6dp"
+            android:paddingStart="6dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@color/buttonIconTint" />
+
+        <com.verifone.payment_sdk.scanner.ActionButton
+            android:id="@+id/camera_switch"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_margin="21dp"
+            android:background="@drawable/button_drawable"
+            android:drawableStart="@drawable/ic_camera_switch"
+            android:paddingEnd="6dp"
+            android:paddingStart="6dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/buttonIconTint" />
+
+        <com.verifone.payment_sdk.scanner.ActionButton
+            android:id="@+id/settings"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_margin="21dp"
+            android:layout_marginBottom="21dp"
+            android:background="@drawable/button_drawable"
+            android:drawableStart="@drawable/ic_settings"
+            android:paddingEnd="6dp"
+            android:paddingStart="6dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/buttonIconTint" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".25"
+                android:background="@android:color/transparent" />
+
+            <com.verifone.payment_sdk.scanner.Bracket
+                android:id="@+id/bracket"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:padding="10dp"
+                android:visibility="invisible"
+                app:color="@color/bracketColor"
+                app:strokeWidth="2dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".25"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".25"
+                android:background="@android:color/transparent" />
+
+            <com.verifone.payment_sdk.scanner.Aimer
+                android:id="@+id/aimer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:padding="10dp"
+                android:visibility="invisible"
+                app:color="@color/aimerColor"
+                app:strokeWidth="2dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".25"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <LinearLayout
+        android:id="@+id/kpi_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/fpsLabel"
+            style="@style/PreviewText"
+            android:layout_width="23dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/textView7"
+            style="@style/PreviewText"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="FPS" />
+
+        <TextView
+            android:id="@+id/textView4"
+            style="@style/PreviewText"
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Pr" />
+
+        <TextView
+            android:id="@+id/firstPreviewKpi"
+            style="@style/PreviewText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/textView5"
+            style="@style/PreviewText"
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Fo" />
+
+        <TextView
+            android:id="@+id/firstFocusKpi"
+            style="@style/PreviewText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/textView6"
+            style="@style/PreviewText"
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Bc" />
+
+        <TextView
+            android:id="@+id/firstBarcodeKpi"
+            style="@style/PreviewText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/textView8"
+            style="@style/PreviewText"
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Fp" />
+
+        <TextView
+            android:id="@+id/frameProcessing"
+            style="@style/PreviewText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/textView9"
+            style="@style/PreviewText"
+            android:layout_width="22dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Bp" />
+
+        <TextView
+            android:id="@+id/barcodeProcessing"
+            style="@style/PreviewText"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="0" />
+
+    </LinearLayout>
+
+</RelativeLayout>

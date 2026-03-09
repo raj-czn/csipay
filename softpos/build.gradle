@@ -32,13 +32,11 @@ android {
                     "META-INF/NOTICE",
                     "META-INF/DEPENDENCIES"
             ]
+            pickFirsts += ["**"]
         }
 
         jniLibs {
-            pickFirsts += [
-                    "lib/*/libtlvtree.so",
-                    "lib/*/libpcltools.so"
-            ]
+            pickFirsts += ["**"]
         }
     }
 
@@ -49,16 +47,64 @@ android {
 }
 
 dependencies {
-
-    // triPOS vendor AARs
-    api fileTree(dir: "libs", include: ["*.aar"])
-
-    // required libraries
-    api 'androidx.appcompat:appcompat:1.7.1'
+    // Android dependencies
+    api 'androidx.appcompat:appcompat:1.7.0'
+    api 'androidx.core:core-ktx:1.7.0'
+    api 'androidx.work:work-runtime-ktx:2.10.0'
+    api 'androidx.work:work-runtime:2.10.0'
+    
+    // Apache dependencies
+    api 'org.apache.logging.log4j:log4j-api:2.17.1'
+    api 'org.apache.logging.log4j:log4j-core:2.17.1'
+    api 'commons-io:commons-io:2.11.0'
+    api 'commons-validator:commons-validator:1.7'
+    api 'org.apache.commons:commons-compress:1.21'
+    api 'org.apache.commons:commons-lang3:3.12.0'
+    
+    // Google dependencies
     api 'com.google.android.material:material:1.13.0'
-
-    implementation 'com.google.code.gson:gson:2.13.2'
-    implementation 'org.apache.commons:commons-lang3:3.20.0'
+    api 'com.google.dagger:dagger:2.46'
+    api 'com.google.code.gson:gson:2.13.1'
+    api 'com.google.zxing:core:3.5.3'
+    
+    // Kotlin
+    api 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.0'
+    
+    // Database
+    api 'io.realm:realm-android-library:10.18.0'
+    
+    // XML
+    api 'org.simpleframework:simple-xml:2.7.1'
+    
+    // Networking
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
+    api 'com.squareup.okhttp3:okhttp:4.10.0'
+    api 'com.squareup.okhttp3:okhttp-tls:4.10.0'
+    api 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+    
+    // RxJava
+    api 'io.reactivex.rxjava2:rxjava:2.2.21'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'com.jakewharton.rxbinding2:rxbinding:2.2.0'
+    
+    // Barcode scanning
+    api 'com.journeyapps:zxing-android-embedded:4.3.0'
+    
+    // Vendor AARs from Maven
+    api 'com.csipay.vendor:ingenico-usdk-13.11.0:1.0'
+    api 'com.csipay.vendor:ingenico-usdk-wrapper-2.0.0:1.0'
+    api 'com.csipay.vendor:PaymentSDK-3.68.1-sdi:1.0'
+    api 'com.csipay.vendor:PclServiceLib_2.21.02:1.0'
+    api 'com.csipay.vendor:PclUtilities_2.21.02:1.0'
+    api 'com.csipay.vendor:printsdk-3.0.0:1.0'
+    api 'com.csipay.vendor:rba_sdk:1.0'
+    api 'com.csipay.vendor:retail-types-release-22.01.06.01-0010:1.0'
+    api 'com.csipay.vendor:roamreaderunifiedapi-2.5.3.100-release:1.0'
+    api 'com.csipay.vendor:triposmobilesdk-release:1.0'
+    api 'com.csipay.vendor:UpdateServiceLib-0.1.293:1.0'
+    api 'com.csipay.vendor:ux-server-release-22.01.06.01-0010:1.0'
+    api 'com.csipay.vendor:ipclbridge:1.0'
 }
 
 publishing {
@@ -68,16 +114,70 @@ publishing {
         release(MavenPublication) {
 
             groupId = "com.csipay"
-            artifactId = "softpos"
-            version = "1.0.0"
+            artifactId = "softpos-sdk"
+            version = "1.1.1"
 
             afterEvaluate {
                 from components.release
+            }
+
+            pom {
+                name = "CSIPay SoftPOS SDK"
+                description = "Unified SDK for SoftPOS payment processing"
+                url = "https://github.com/raj-czn/softpos-sdk"
             }
         }
     }
 
     repositories {
         mavenLocal()
+        
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/raj-czn/softpos-sdk")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+                password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
+
+task publishVendorAarsToLocal {
+    doLast {
+        def repoDir = file("${System.getProperty('user.home')}/.m2/repository")
+        
+        fileTree(dir: "libs", include: ["*.aar"]).each { aarFile ->
+            def aarName = aarFile.name.replace('.aar', '')
+            def groupPath = 'com/csipay/vendor'
+            def destDir = file("${repoDir}/${groupPath}/${aarName}/1.0")
+            destDir.mkdirs()
+            
+            copy {
+                from aarFile
+                into destDir
+                rename { "${aarName}-1.0.aar" }
+            }
+            
+            def pomContent = """<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.csipay.vendor</groupId>
+  <artifactId>${aarName}</artifactId>
+  <version>1.0</version>
+  <packaging>aar</packaging>
+</project>
+"""
+            file("${destDir}/${aarName}-1.0.pom").text = pomContent
+        }
+        println "Published ${fileTree(dir: 'libs', include: ['*.aar']).files.size()} vendor AARs to local Maven"
+    }
+}
+
+task publishVendorAarsToGitHub {
+    doLast {
+        println "Vendor AARs must be published manually to GitHub Packages."
+        println "Use the GitHub web interface to upload packages or set up GitHub Actions."
+        println "Alternatively, publish to mavenLocal() and clients can use that for development."
     }
 }

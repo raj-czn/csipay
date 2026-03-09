@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="No">NO</string>
+    <string name="Yes">YES</string>
+    <string name="accessibility">Accessibility</string>
+    <string name="accessibility_and_assistance_mode_will_be_disabled">\'Accessibility\' and \'Assistance\' mode will be disabled until the payment screen is ready to accept the payment</string>
+    <string name="accessibility_description_off">Off / Audio and Speech to enter PIN</string>
+    <string name="accessibility_description_on">On / Audio and Speech to enter PIN</string>
+    <string name="address">Address</string>
+    <string name="appInfo">APP INFO</string>
+    <string name="are_you_having_difficulty_hearing_the_device">Are you having difficulty hearing the device? You can plug in your headphones. I can direct you to the headphone jack.</string>
+    <string name="assistance">Assistance</string>
+    <string name="assistance_description_off">Off / Assistant PIN entry mode for visual loss</string>
+    <string name="assistance_description_on">On / Assistant PIN entry mode for visual loss</string>
+    <string name="blind">Blind</string>
+    <string name="byod" translatable="false">Verifone vfiGlobal</string>
+    <string name="carbon_10" translatable="false">Verifone Carbon-10</string>
+    <string name="carbon_8" translatable="false">Verifone Carbon-8</string>
+    <string name="carbon_mobile_5" translatable="false">Carbon Mobile 5</string>
+    <string name="close_help_window">close help window</string>
+    <string name="connection_type">Connection Type</string>
+    <string name="corners">Lesson3. Corners</string>
+    <string name="default_welcome_message">PSDK Test Harness</string>
+    <string name="difficulty_seeing_screen">Difficulty seeing screen</string>
+    <string name="discovered_devices">Discovered devices</string>
+    <string name="discovery_enable_bluetooth">Enable bluetooth</string>
+    <string name="discovery_enable_usb">Enable USB</string>
+    <string name="double_tap">Lesson2. Double Tap</string>
+    <string name="enter_training_pin">Lesson6. Enter Training PIN</string>
+    <string name="error_permissions">This app does not have critical camera permissions needed to run Scanner. Please check your permissions settings.</string>
+    <string name="exit_training">Exit Training</string>
+    <string name="exploration">Lesson1. Exploration</string>
+    <string name="focus_mode_continuous" translatable="false">continuous</string>
+    <string name="focus_mode_manual" translatable="false">manual</string>
+    <string name="focus_mode_triggered" translatable="false">triggered</string>
+    <string name="full_train">Full Training</string>
+    <string name="has_navigator">Has Navigator?</string>
+    <string name="have_you_used_touch_screen_terminal">\"Have you used a touch screen terminal for PIN entry?\"</string>
+    <string name="help_guidelines">Guidelines</string>
+    <string name="invalid_license">No valid license</string>
+    <string name="ip_scanning">IP Scanning</string>
+    <string name="keypad_colors">Keypad Colors</string>
+    <string name="keypad_colors_description">Present keypad color options to customer</string>
+    <string name="logical_device_id">Logical Device ID</string>
+    <string name="main_on">ON</string>
+    <string name="model">Model</string>
+    <string name="my_devices">My devices</string>
+    <string name="navigation">Lesson4. Navigation</string>
+    <string name="navigator_app_name">PaymentSDK</string>
+    <string name="navigator_menu_button_description">Navigator menu button</string>
+    <string name="no_would_you_like_training">No: \"Would you like training\"</string>
+    <string name="ok">OK</string>
+    <string name="payment_app_name">Payment App Name</string>
+    <string name="payment_app_version">Payment App Version</string>
+    <string name="payment_protocol">Payment Protocol</string>
+    <string name="permission_camera_rationale"> Camera permissions are needed to use scanner </string>
+    <string name="permissions_error_title">Permissions error</string>
+    <string name="psdk_add_new_device">Add device</string>
+    <string name="psdk_connection_type_bluetooth">Bluetooth</string>
+    <string name="psdk_connection_type_network">Network</string>
+    <string name="psdk_connection_type_usb">USB</string>
+    <string name="psdk_device_info">Device Info</string>
+    <string name="psdk_forget_device">Forget device</string>
+    <string name="ratio_standard" translatable="false">4:3</string>
+    <string name="ratio_widescreen" translatable="false">16:9</string>
+    <string name="scanner_honeywell" translatable="false">Honeywell</string>
+    <string name="scanner_scandit" translatable="false">Scandit</string>
+    <string name="scanner_zebra" translatable="false">Zebra</string>
+    <string name="scanner_zxing" translatable="false">Zxing</string>
+    <string name="sdk_version">SDK Version</string>
+    <string name="serial_number">Serial Number / ID</string>
+    <string name="service_discovery">Service Discovery</string>
+    <string name="shall_we_try_speech_options">\"Shall we try the speech options?\"</string>
+    <string name="short_train">Short Training</string>
+    <string name="start">Start</string>
+    <string name="started">Started</string>
+    <string name="still_cant_see">Still Can\'t See</string>
+    <string name="struggles_to_hear">Struggles to Hear</string>
+    <string name="submit_digit">Lesson5. Submit Digit</string>
+    <string name="tap_amount_vocalization_button">Tap \'Total Amount Vocalization\' button</string>
+    <string name="tap_assistance_button">Tap \'Assistance\' button</string>
+    <string name="tap_keypad_colors_button">Tap \'Keypad Colors\' button</string>
+    <string name="tap_training_button">Tap \'Training\' button</string>
+    <string name="total_amount_description">Enable total amount vocalization to customer</string>
+    <string name="total_amount_vocalization">Total Amount Vocalization</string>
+    <string name="training">Training</string>
+    <string name="training_description">For new users or refreshers</string>
+    <string name="training_double_tap_wait">Wait for the user to double tap to activate the training mode</string>
+    <string name="verifone_navigator_logo">Verifone Navigator logo</string>
+    <string name="would_you_like_high_contrast">\"Would you like the high contrast mode?\"</string>
+    <string name="yes_you_can_double_tap">Yes: \"You can double tap to begin PIN entry.\"</string>
+</resources>

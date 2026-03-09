@@ -18,8 +18,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        flatDir {
-            dirs("softpos/libs")
+        mavenLocal()
+        maven {
+            url = uri("https://maven.pkg.github.com/raj-czn/softpos-sdk")
+            credentials {
+                username = providers.gradleProperty("gpr.user").getOrElse(System.getenv("GITHUB_ACTOR"))
+                password = providers.gradleProperty("gpr.token").getOrElse(System.getenv("GITHUB_TOKEN"))
+            }
         }
     }
 

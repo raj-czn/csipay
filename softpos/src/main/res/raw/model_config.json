@@ -1,0 +1,40 @@
+{
+  "models": {
+    "Carbon Mobile 5": {
+      "cameraApi": 1,
+      "zoom": 1.0,
+      "focusTriggerInterval": 1000,
+      "barcodeAimer": true
+    },
+    "CM5": {
+      "cameraApi": 1,
+      "zoom": 1.0,
+      "focusTriggerInterval": 1000,
+      "barcodeAimer": true
+    },
+    "CM5P": {
+      "cameraApi": 1,
+      "zoom": 1.0,
+      "focusTriggerInterval": 1000,
+      "barcodeAimer": true
+    },
+    "Verifone Carbon-8": {
+      "cameraApi": 2,
+      "zoom": 1.3,
+      "focusTriggerInterval": 1500,
+      "barcodeAimer": false
+    },
+    "Verifone Carbon-10": {
+      "cameraApi": 2,
+      "zoom": 1.3,
+      "focusTriggerInterval": 1500,
+      "barcodeAimer": true
+    },
+    "Verifone vfiGlobal": {
+      "cameraApi": 1,
+      "zoom": 1.0,
+      "focusTriggerInterval": 1500,
+      "barcodeAimer": false
+    }
+  }
+}
