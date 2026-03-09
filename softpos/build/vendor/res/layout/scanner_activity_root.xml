@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2021 by VeriFone, Inc.
+  ~ All Rights Reserved.
+  ~ THIS FILE CONTAINS PROPRIETARY AND CONFIDENTIAL INFORMATION
+  ~ AND REMAINS THE UNPUBLISHED PROPERTY OF VERIFONE, INC.
+  ~
+  ~ Use, disclosure, or reproduction is prohibited
+  ~ without prior written approval from VeriFone, Inc.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>

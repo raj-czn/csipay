@@ -1,0 +1,138 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.csipay",
+    "module": "softpos",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.0-milestone-1"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "CSIPaySDK",
+          "module": "triposlibs",
+          "version": {
+            "requires": "unspecified"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.7.1"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.13.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "softpos-1.0.0.aar",
+          "url": "softpos-1.0.0.aar",
+          "size": 6267,
+          "sha512": "2bdef98268b943473d0eda1fa505fbde6f741b6568cbe7f1c22ee6757f7b39e2499c2114802b0e6b65afef57460e9c27d0112c61076fbeaa8ca730f7a66f2e95",
+          "sha256": "425a6df27393c0a3ee1ecd9be55fb360804e5488bb346fa0bbd53ce84eaa93ab",
+          "sha1": "3c13c7076b53bc1f3747ad49b902f18ce52da127",
+          "md5": "90e932ba35f1f3e9953f5dc570662b23"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.google.code.gson",
+          "module": "gson",
+          "version": {
+            "requires": "2.13.2"
+          }
+        },
+        {
+          "group": "org.apache.commons",
+          "module": "commons-lang3",
+          "version": {
+            "requires": "3.20.0"
+          }
+        },
+        {
+          "group": "CSIPaySDK",
+          "module": "triposlibs",
+          "version": {
+            "requires": "unspecified"
+          }
+        },
+        {
+          "group": "androidx.appcompat",
+          "module": "appcompat",
+          "version": {
+            "requires": "1.7.1"
+          }
+        },
+        {
+          "group": "com.google.android.material",
+          "module": "material",
+          "version": {
+            "requires": "1.13.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "softpos-1.0.0.aar",
+          "url": "softpos-1.0.0.aar",
+          "size": 6267,
+          "sha512": "2bdef98268b943473d0eda1fa505fbde6f741b6568cbe7f1c22ee6757f7b39e2499c2114802b0e6b65afef57460e9c27d0112c61076fbeaa8ca730f7a66f2e95",
+          "sha256": "425a6df27393c0a3ee1ecd9be55fb360804e5488bb346fa0bbd53ce84eaa93ab",
+          "sha1": "3c13c7076b53bc1f3747ad49b902f18ce52da127",
+          "md5": "90e932ba35f1f3e9953f5dc570662b23"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "softpos-1.0.0-sources.jar",
+          "url": "softpos-1.0.0-sources.jar",
+          "size": 3763,
+          "sha512": "95fe7f6ad85a96983db370adfa66b4aecf36e5c26187660619ae01563cee84157030a541535aed3f5686048281945ff031444b8d4a82dd3e2500af18b327d825",
+          "sha256": "dcbce540e8e88c5871ecaf66b7578b619c0a1c7d47b4073bf01be959d3d38144",
+          "sha1": "4df3d2cc87a21f7c51f3e07d0fbaf3d13d50b121",
+          "md5": "0adf009bcdde6434ef66c3cc1b0d2917"
+        }
+      ]
+    }
+  ]
+}

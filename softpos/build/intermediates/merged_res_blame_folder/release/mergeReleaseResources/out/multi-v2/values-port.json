@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.csipay.softpos-mergeReleaseResources-30:/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "/Users/rajitha/.gradle/caches/9.0-milestone-1/transforms/af851a87c921652088a183bc9117ff49/transformed/appcompat-1.7.1/res/values-port/values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "com.csipay.softpos-release-32:/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "/Users/rajitha/.gradle/caches/9.0-milestone-1/transforms/af851a87c921652088a183bc9117ff49/transformed/appcompat-1.7.1/res/values-port/values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        }
+    ]
+}

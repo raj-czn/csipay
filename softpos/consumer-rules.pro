@@ -1,0 +1,3 @@
+-keep class com.vantiv.** { *; }
+-keep class com.tripos.** { *; }
+-keep class com.ingenico.** { *; }

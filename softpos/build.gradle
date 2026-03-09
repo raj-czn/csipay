@@ -1,0 +1,83 @@
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
+
+android {
+
+    namespace "com.csipay.softpos"
+    compileSdk 36
+
+    defaultConfig {
+        minSdk 24
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
+
+    packaging {
+
+        resources {
+            excludes += [
+                    "META-INF/LICENSE",
+                    "META-INF/NOTICE",
+                    "META-INF/DEPENDENCIES"
+            ]
+        }
+
+        jniLibs {
+            pickFirsts += [
+                    "lib/*/libtlvtree.so",
+                    "lib/*/libpcltools.so"
+            ]
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+
+    // triPOS vendor AARs
+    api fileTree(dir: "libs", include: ["*.aar"])
+
+    // required libraries
+    api 'androidx.appcompat:appcompat:1.7.1'
+    api 'com.google.android.material:material:1.13.0'
+
+    implementation 'com.google.code.gson:gson:2.13.2'
+    implementation 'org.apache.commons:commons-lang3:3.20.0'
+}
+
+publishing {
+
+    publications {
+
+        release(MavenPublication) {
+
+            groupId = "com.csipay"
+            artifactId = "softpos"
+            version = "1.0.0"
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+
+    repositories {
+        mavenLocal()
+    }
+}
