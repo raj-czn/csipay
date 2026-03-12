@@ -6,5 +6,5 @@ public interface TransactionListener {
 
     void onTransactionComplete(TransactionResult result);
 
-    void onTransactionError(String error);
+    void onTransactionError(SdkError error);
 }

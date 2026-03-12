@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.csipay.softpos.api.CardReaderListener;
 import com.csipay.softpos.api.InitializationListener;
+import com.csipay.softpos.api.SdkError;
 import com.csipay.softpos.api.TransactionListener;
 import com.csipay.softpos.config.SoftposConfig;
 import com.csipay.softpos.config.TriposConfigurationBuilder;
@@ -31,14 +32,51 @@ public class DeviceManager {
 
     public void initialize(Context context, SoftposConfig softposConfig, InitializationListener listener) {
 
-        Configuration configuration = TriposConfigurationBuilder.build(softposConfig);
+        if (isInitialized()) {
+            if (listener != null) listener.onInitializationError(SdkError.ALREADY_INITIALIZED);
+            return;
+        }
+
+        // Validate device capabilities
+        Context appContext = context.getApplicationContext();
+        DeviceCapabilities capabilities = DeviceCapabilityChecker.check(appContext);
+
+        if (!capabilities.isNfcAvailable()) {
+            if (listener != null) {
+                boolean isDisabled = false;
+                for (String w : capabilities.getWarnings()) {
+                    if (w.contains("disabled")) { isDisabled = true; break; }
+                }
+                listener.onInitializationError(
+                        isDisabled ? SdkError.NFC_DISABLED : SdkError.NFC_NOT_AVAILABLE
+                );
+            }
+            return;
+        }
+
+        if (!capabilities.isInternetAvailable()) {
+            if (listener != null) listener.onInitializationError(SdkError.NO_INTERNET);
+            return;
+        }
+
+        // Notify capabilities validated
+        if (listener != null) listener.onInitialized(capabilities);
+
+        // Build triPOS configuration
+        Configuration configuration;
+        try {
+            configuration = TriposConfigurationBuilder.build(softposConfig);
+        } catch (Exception e) {
+            if (listener != null) listener.onInitializationError(SdkError.INVALID_CONFIGURATION);
+            return;
+        }
 
         try {
 
             vtp = triPOSMobileSDK.getSharedVtp();
 
             vtp.initialize(
-                context.getApplicationContext(),
+                appContext,
                 configuration,
                 new DeviceConnectionListener() {
 
@@ -55,7 +93,7 @@ public class DeviceManager {
                     @Override
                     public void onError(Exception e) {
                         if (listener != null)
-                            listener.onInitializationError(e.getMessage());
+                            listener.onInitializationError(SdkError.DEVICE_CONNECTION_FAILED);
                     }
 
                     @Override
@@ -70,7 +108,7 @@ public class DeviceManager {
         } catch (Exception e) {
 
             if (listener != null)
-                listener.onInitializationError(e.getMessage());
+                listener.onInitializationError(SdkError.fromException(2020, e));
         }
     }
 
@@ -92,7 +130,7 @@ public class DeviceManager {
     public void processSale(BigDecimal amount, String referenceNumber,
                             CardReaderListener cardReaderListener, TransactionListener listener) {
         if (!isInitialized()) {
-            if (listener != null) listener.onTransactionError("SDK not initialized");
+            if (listener != null) listener.onTransactionError(SdkError.NOT_INITIALIZED);
             return;
         }
 
@@ -113,18 +151,18 @@ public class DeviceManager {
 
                 @Override
                 public void onSaleRequestError(Exception e) {
-                    if (listener != null) listener.onTransactionError(e.getMessage());
+                    if (listener != null) listener.onTransactionError(SdkError.fromException(4001, e));
                 }
             }, createDeviceInteractionListener(cardReaderListener));
         } catch (Exception e) {
-            if (listener != null) listener.onTransactionError(e.getMessage());
+            if (listener != null) listener.onTransactionError(SdkError.fromException(4001, e));
         }
     }
 
     public void processRefund(BigDecimal amount, String referenceNumber,
                               CardReaderListener cardReaderListener, TransactionListener listener) {
         if (!isInitialized()) {
-            if (listener != null) listener.onTransactionError("SDK not initialized");
+            if (listener != null) listener.onTransactionError(SdkError.NOT_INITIALIZED);
             return;
         }
 
@@ -145,17 +183,17 @@ public class DeviceManager {
 
                 @Override
                 public void onRefundRequestError(Exception e) {
-                    if (listener != null) listener.onTransactionError(e.getMessage());
+                    if (listener != null) listener.onTransactionError(SdkError.fromException(4011, e));
                 }
             }, createDeviceInteractionListener(cardReaderListener));
         } catch (Exception e) {
-            if (listener != null) listener.onTransactionError(e.getMessage());
+            if (listener != null) listener.onTransactionError(SdkError.fromException(4011, e));
         }
     }
 
     public void processVoid(String transactionId, TransactionListener listener) {
         if (!isInitialized()) {
-            if (listener != null) listener.onTransactionError("SDK not initialized");
+            if (listener != null) listener.onTransactionError(SdkError.NOT_INITIALIZED);
             return;
         }
 
@@ -173,11 +211,11 @@ public class DeviceManager {
 
                 @Override
                 public void onVoidRequestError(Exception e) {
-                    if (listener != null) listener.onTransactionError(e.getMessage());
+                    if (listener != null) listener.onTransactionError(SdkError.fromException(4010, e));
                 }
             });
         } catch (Exception e) {
-            if (listener != null) listener.onTransactionError(e.getMessage());
+            if (listener != null) listener.onTransactionError(SdkError.fromException(4010, e));
         }
     }
 
