@@ -1,7 +1,6 @@
 package com.csipay.softpos.config;
 
 import com.vantiv.triposmobilesdk.*;
-
 import com.vantiv.triposmobilesdk.enums.*;
 import com.vantiv.triposmobilesdk.express.*;
 
@@ -26,7 +25,11 @@ public class TriposConfigurationBuilder {
 
         ApplicationConfiguration config = new ApplicationConfiguration();
         config.setIdlePrompt(softposConfig.getApplicationName());
-        config.setApplicationMode(ApplicationMode.TestCertification);
+
+        ApplicationMode mode = softposConfig.getEnvironment() == Environment.PRODUCTION
+                ? ApplicationMode.Production
+                : ApplicationMode.TestCertification;
+        config.setApplicationMode(mode);
 
         return config;
     }
@@ -57,7 +60,12 @@ public class TriposConfigurationBuilder {
         host.setApplicationName(app.getApplicationName());
         host.setApplicationVersion(app.getApplicationVersion());
 
-        host.setPaymentProcessor(PaymentProcessor.Worldpay);
+        try {
+            host.setPaymentProcessor(
+                    PaymentProcessor.valueOf(softposConfig.getPaymentProcessor()));
+        } catch (IllegalArgumentException e) {
+            host.setPaymentProcessor(PaymentProcessor.Worldpay);
+        }
 
         return host;
     }
@@ -86,7 +94,13 @@ public class TriposConfigurationBuilder {
         txn.setEmvAllowed(true);
         txn.setTipAllowed(true);
         txn.setDebitAllowed(true);
-        txn.setCurrencyCode(CurrencyCode.USD);
+
+        try {
+            txn.setCurrencyCode(
+                    CurrencyCode.valueOf(softposConfig.getCurrencyCode()));
+        } catch (IllegalArgumentException e) {
+            txn.setCurrencyCode(CurrencyCode.USD);
+        }
 
         return txn;
     }
