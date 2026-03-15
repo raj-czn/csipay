@@ -1,25 +1,23 @@
 # Android/IntelliJ
 *.iml
 .gradle/
-/.gradle/
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+local.properties
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
 .DS_Store
 
 # Build artifacts
-/build
-/*/build
+**/build/
 /captures
 .externalNativeBuild
 .cxx
 
 # Temporary dynamic projects for vendor AARs
-/.vendor-projects
+.vendor-projects/
 
-# Note: The 'repo' folder is NOT ignored so you can push it to your private Git Maven repository.
-# Note: 'vendor-libs' is NOT ignored as it contains the source AARs.
+# Stray build artifacts
+classes.jar

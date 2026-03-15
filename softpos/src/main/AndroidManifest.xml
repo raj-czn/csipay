@@ -11,20 +11,25 @@
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
 
-    <!-- NFC (contactless payments) -->
+    <!-- NFC (contactless / tap-to-pay) -->
     <uses-permission android:name="android.permission.NFC" />
 
-    <!-- Camera (barcode scanning) -->
+    <!-- Camera (security: disable during payment) -->
     <uses-permission android:name="android.permission.CAMERA" />
 
     <!-- Location (payment compliance) -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <!-- USB host (optional hardware) -->
+    <!-- Overlay (display over POS app during payment) -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- Hardware features (optional) -->
     <uses-feature android:name="android.hardware.usb.host" android:required="false" />
     <uses-feature android:name="android.hardware.bluetooth" android:required="false" />
-    <uses-feature android:name="android.hardware.nfc" android:required="false" />
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.location" android:required="false" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
 
 </manifest>

@@ -5,8 +5,10 @@
 -keep class com.csipay.softpos.config.Environment { *; }
 -keep class com.csipay.softpos.api.** { *; }
 -keep class com.csipay.softpos.transaction.TransactionResult { *; }
+-keep class com.csipay.softpos.transaction.TransactionResult$Builder { *; }
 -keep class com.csipay.softpos.transaction.TransactionType { *; }
 -keep class com.csipay.softpos.transaction.TransactionStatus { *; }
+-keep class com.csipay.softpos.device.DeviceCapabilities { *; }
 
 # Vendor SDK classes
 -keep class com.vantiv.** { *; }
@@ -19,4 +21,10 @@
 # Keep native methods
 -keepclasseswithmembernames class * {
     native <methods>;
+}
+
+# Keep enums
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
 }

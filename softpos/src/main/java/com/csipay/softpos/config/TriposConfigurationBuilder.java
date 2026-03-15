@@ -2,7 +2,8 @@ package com.csipay.softpos.config;
 
 import com.vantiv.triposmobilesdk.*;
 import com.vantiv.triposmobilesdk.enums.*;
-import com.vantiv.triposmobilesdk.express.*;
+import com.vantiv.triposmobilesdk.express.Application;
+import com.vantiv.triposmobilesdk.express.Credentials;
 
 import java.math.BigDecimal;
 
@@ -38,33 +39,24 @@ public class TriposConfigurationBuilder {
 
         HostConfiguration host = new HostConfiguration();
 
-        Credentials credentials =
-            new Credentials(
-                    softposConfig.getAcceptorId(),
-                    softposConfig.getAccountToken(),
-                    softposConfig.getAccountId()
-            );
+        host.setAcceptorId(softposConfig.getAcceptorId());
+        host.setAccountId(softposConfig.getAccountId());
+        host.setAccountToken(softposConfig.getAccountToken());
 
-        host.setAcceptorId(credentials.getAcceptorID());
-        host.setAccountId(credentials.getAccountID());
-        host.setAccountToken(credentials.getAccountToken());
-
-        Application app =
-                new Application(
-                        softposConfig.getApplicationId(),
-                        softposConfig.getApplicationName(),
-                        softposConfig.getApplicationVersion()
-                );
-
-        host.setApplicationId(app.getApplicationID());
-        host.setApplicationName(app.getApplicationName());
-        host.setApplicationVersion(app.getApplicationVersion());
+        host.setApplicationId(softposConfig.getApplicationId());
+        host.setApplicationName(softposConfig.getApplicationName());
+        host.setApplicationVersion(softposConfig.getApplicationVersion());
 
         try {
             host.setPaymentProcessor(
                     PaymentProcessor.valueOf(softposConfig.getPaymentProcessor()));
         } catch (IllegalArgumentException e) {
             host.setPaymentProcessor(PaymentProcessor.Worldpay);
+        }
+
+        String vaultId = softposConfig.getVaultId();
+        if (vaultId != null && !vaultId.isEmpty()) {
+            host.setVaultId(vaultId);
         }
 
         return host;
@@ -79,10 +71,10 @@ public class TriposConfigurationBuilder {
         device.setTerminalId(softposConfig.getTerminalId());
 
         device.setHeartbeatEnabled(true);
-        device.setContactlessAllowed(true);
-        device.setKeyedEntryAllowed(true);
+        device.setContactlessAllowed(softposConfig.isContactlessAllowed());
+        device.setKeyedEntryAllowed(false);
 
-        device.setSleepTimeoutSeconds(new BigDecimal(300));
+        device.setSleepTimeoutSeconds(new BigDecimal(softposConfig.getSleepTimeoutSeconds()));
 
         return device;
     }
@@ -91,9 +83,11 @@ public class TriposConfigurationBuilder {
 
         TransactionConfiguration txn = new TransactionConfiguration();
 
-        txn.setEmvAllowed(true);
-        txn.setTipAllowed(true);
-        txn.setDebitAllowed(true);
+        txn.setEmvAllowed(softposConfig.isEmvAllowed());
+        txn.setTipAllowed(softposConfig.isTipAllowed());
+        txn.setDebitAllowed(softposConfig.isDebitAllowed());
+        txn.setQuickChipAllowed(softposConfig.isQuickChipAllowed());
+        txn.setCashbackAllowed(softposConfig.isCashbackAllowed());
 
         try {
             txn.setCurrencyCode(
@@ -110,8 +104,14 @@ public class TriposConfigurationBuilder {
         StoreAndForwardConfiguration config =
             new StoreAndForwardConfiguration();
 
-        config.setNumberOfDaysToRetainProcessedTransactions(1);
-        config.setStoringTransactionsAllowed(true);
+        config.setNumberOfDaysToRetainProcessedTransactions(
+                softposConfig.getStoreAndForwardRetentionDays());
+        config.setStoringTransactionsAllowed(softposConfig.isStoreAndForwardEnabled());
+
+        BigDecimal limit = softposConfig.getStoreAndForwardAmountLimit();
+        if (limit != null) {
+            config.setTransactionAmountLimit(limit.intValue());
+        }
 
         return config;
     }

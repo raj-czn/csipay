@@ -116,7 +116,7 @@ publishing {
 
             groupId = "com.csipay"
             artifactId = "softpos-sdk"
-            version = "1.5.0"
+            version = "2.0.2"
 
             afterEvaluate {
                 from components.release

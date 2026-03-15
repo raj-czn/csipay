@@ -5,6 +5,9 @@ public enum TransactionStatus {
     PARTIALLY_APPROVED,
     DECLINED,
     VOIDED,
+    REVERSED,
+    RETURNED,
+    CANCELLED,
     ERROR,
     UNKNOWN
 }

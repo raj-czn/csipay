@@ -6,9 +6,13 @@ public interface InitializationListener {
 
     void onInitialized(DeviceCapabilities capabilities);
 
-    void onDeviceConnected();
+    void onDeviceConnected(String deviceDescription, String model, String serialNumber);
 
     void onDeviceDisconnected();
+
+    void onDeviceReady();
+
+    void onBatteryLow();
 
     void onInitializationError(SdkError error);
 }

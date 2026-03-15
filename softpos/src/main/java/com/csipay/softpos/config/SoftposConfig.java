@@ -1,5 +1,7 @@
 package com.csipay.softpos.config;
 
+import java.math.BigDecimal;
+
 public class SoftposConfig {
 
     private final String acceptorId;
@@ -12,6 +14,17 @@ public class SoftposConfig {
     private final Environment environment;
     private final String currencyCode;
     private final String paymentProcessor;
+    private final boolean tipAllowed;
+    private final boolean cashbackAllowed;
+    private final boolean debitAllowed;
+    private final boolean emvAllowed;
+    private final boolean contactlessAllowed;
+    private final boolean quickChipAllowed;
+    private final boolean storeAndForwardEnabled;
+    private final int storeAndForwardRetentionDays;
+    private final BigDecimal storeAndForwardAmountLimit;
+    private final int sleepTimeoutSeconds;
+    private final String vaultId;
 
     private SoftposConfig(Builder builder) {
         this.acceptorId = builder.acceptorId;
@@ -24,6 +37,17 @@ public class SoftposConfig {
         this.environment = builder.environment;
         this.currencyCode = builder.currencyCode;
         this.paymentProcessor = builder.paymentProcessor;
+        this.tipAllowed = builder.tipAllowed;
+        this.cashbackAllowed = builder.cashbackAllowed;
+        this.debitAllowed = builder.debitAllowed;
+        this.emvAllowed = builder.emvAllowed;
+        this.contactlessAllowed = builder.contactlessAllowed;
+        this.quickChipAllowed = builder.quickChipAllowed;
+        this.storeAndForwardEnabled = builder.storeAndForwardEnabled;
+        this.storeAndForwardRetentionDays = builder.storeAndForwardRetentionDays;
+        this.storeAndForwardAmountLimit = builder.storeAndForwardAmountLimit;
+        this.sleepTimeoutSeconds = builder.sleepTimeoutSeconds;
+        this.vaultId = builder.vaultId;
     }
 
     public String getAcceptorId() { return acceptorId; }
@@ -36,6 +60,17 @@ public class SoftposConfig {
     public Environment getEnvironment() { return environment; }
     public String getCurrencyCode() { return currencyCode; }
     public String getPaymentProcessor() { return paymentProcessor; }
+    public boolean isTipAllowed() { return tipAllowed; }
+    public boolean isCashbackAllowed() { return cashbackAllowed; }
+    public boolean isDebitAllowed() { return debitAllowed; }
+    public boolean isEmvAllowed() { return emvAllowed; }
+    public boolean isContactlessAllowed() { return contactlessAllowed; }
+    public boolean isQuickChipAllowed() { return quickChipAllowed; }
+    public boolean isStoreAndForwardEnabled() { return storeAndForwardEnabled; }
+    public int getStoreAndForwardRetentionDays() { return storeAndForwardRetentionDays; }
+    public BigDecimal getStoreAndForwardAmountLimit() { return storeAndForwardAmountLimit; }
+    public int getSleepTimeoutSeconds() { return sleepTimeoutSeconds; }
+    public String getVaultId() { return vaultId; }
 
     public static class Builder {
 
@@ -49,6 +84,17 @@ public class SoftposConfig {
         private Environment environment = Environment.TEST;
         private String currencyCode = "USD";
         private String paymentProcessor = "Worldpay";
+        private boolean tipAllowed = false;
+        private boolean cashbackAllowed = false;
+        private boolean debitAllowed = true;
+        private boolean emvAllowed = true;
+        private boolean contactlessAllowed = true;
+        private boolean quickChipAllowed = true;
+        private boolean storeAndForwardEnabled = true;
+        private int storeAndForwardRetentionDays = 1;
+        private BigDecimal storeAndForwardAmountLimit = new BigDecimal("50.00");
+        private int sleepTimeoutSeconds = 300;
+        private String vaultId;
 
         public Builder setAcceptorId(String acceptorId) { this.acceptorId = acceptorId; return this; }
         public Builder setAccountId(String accountId) { this.accountId = accountId; return this; }
@@ -60,6 +106,17 @@ public class SoftposConfig {
         public Builder setEnvironment(Environment environment) { this.environment = environment; return this; }
         public Builder setCurrencyCode(String currencyCode) { this.currencyCode = currencyCode; return this; }
         public Builder setPaymentProcessor(String paymentProcessor) { this.paymentProcessor = paymentProcessor; return this; }
+        public Builder setTipAllowed(boolean tipAllowed) { this.tipAllowed = tipAllowed; return this; }
+        public Builder setCashbackAllowed(boolean cashbackAllowed) { this.cashbackAllowed = cashbackAllowed; return this; }
+        public Builder setDebitAllowed(boolean debitAllowed) { this.debitAllowed = debitAllowed; return this; }
+        public Builder setEmvAllowed(boolean emvAllowed) { this.emvAllowed = emvAllowed; return this; }
+        public Builder setContactlessAllowed(boolean contactlessAllowed) { this.contactlessAllowed = contactlessAllowed; return this; }
+        public Builder setQuickChipAllowed(boolean quickChipAllowed) { this.quickChipAllowed = quickChipAllowed; return this; }
+        public Builder setStoreAndForwardEnabled(boolean enabled) { this.storeAndForwardEnabled = enabled; return this; }
+        public Builder setStoreAndForwardRetentionDays(int days) { this.storeAndForwardRetentionDays = days; return this; }
+        public Builder setStoreAndForwardAmountLimit(BigDecimal limit) { this.storeAndForwardAmountLimit = limit; return this; }
+        public Builder setSleepTimeoutSeconds(int seconds) { this.sleepTimeoutSeconds = seconds; return this; }
+        public Builder setVaultId(String vaultId) { this.vaultId = vaultId; return this; }
 
         public SoftposConfig build() {
             requireNonEmpty(acceptorId, "acceptorId");
